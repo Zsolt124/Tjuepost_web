@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Tjuepost{% endblock %}
+
+{% block content %}
+<section class="card hero">
+    <div class="hero-content">
+        <h2>Welcome to Tjuepost</h2>
+        <p>....</p>
+        <a class="cta" href="#">Get Started</a>
+    </div>
+    <div class="hero-media">
+        <!-- Placeholder image -->
+        <svg width="200" height="140" viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="140" rx="8" fill="#eef6fb" />
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#0b63b1" font-size="14">Tjuepost</text>
+        </svg>
+    </div>
+</section>
+
+<section style="margin-top:1rem;" class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+        <h3>Latest</h3>
+        <a href="{{ url_for('new_post') }}" class="cta">New Post</a>
+    </div>
+    {% if posts and posts|length > 0 %}
+        {% for post in posts %}
+            <article class="card" style="margin-bottom:1rem">
+                <h4>{{ post.title or 'Untitled' }}</h4>
+                <div style="color:var(--muted);font-size:.9rem;margin-bottom:.5rem">{{ post.created }}</div>
+                <p>{{ post.body }}</p>
+            </article>
+        {% endfor %}
+    {% else %}
+        <div class="card">
+            <p class="muted">No posts yet — your feed will appear here.</p>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin - Tjuepost{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h2>Admin Panel</h2>
+  <p>Manage users and admin status.</p>
+  {% if users %}
+    <table style="width:100%;border-collapse:collapse;margin-top:1rem">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding:.5rem;border-bottom:1px solid #e5e7eb">Username</th>
+          <th style="text-align:left;padding:.5rem;border-bottom:1px solid #e5e7eb">Admin</th>
+          <th style="text-align:left;padding:.5rem;border-bottom:1px solid #e5e7eb">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in users %}
+          <tr>
+            <td style="padding:.5rem;border-bottom:1px solid #f3f4f6">{{ u.username }}</td>
+            <td style="padding:.5rem;border-bottom:1px solid #f3f4f6">{{ 'Yes' if u.is_admin else 'No' }}</td>
+            <td style="padding:.5rem;border-bottom:1px solid #f3f4f6">
+              {% if u.username != session.user %}
+                <form method="post" action="{{ url_for('admin_toggle') }}" style="display:inline">
+                  <input type="hidden" name="username" value="{{ u.username }}">
+                  <button class="cta" type="submit">{{ 'Revoke' if u.is_admin else 'Make admin' }}</button>
+                </form>
+              {% else %}
+                <em style="color:var(--muted)">(your account)</em>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No users found.</p>
+  {% endif %}
+</div>
+{% endblock %}

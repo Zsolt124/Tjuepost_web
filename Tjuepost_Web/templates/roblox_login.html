@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Login with Roblox - Tjuepost{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h2>Log in with your Roblox account</h2>
+  <p>Enter your Roblox username. We'll create a short token for you to copy into your Roblox profile description (About). After you add it, come back and click "Check" to verify ownership.</p>
+  <form method="post" action="{{ url_for('roblox_start') }}">
+    <label>Roblox username</label>
+    <input name="roblox_username" type="text" style="width:100%;padding:.5rem;margin:.5rem 0;border:1px solid #e5e7eb;border-radius:6px">
+    <div style="margin-top:.5rem">
+      <button class="cta" type="submit">Get token</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
