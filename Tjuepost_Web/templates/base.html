@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Tjuepost.com{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo"><a href="/">Tjuepost</a></h1>
+      <nav class="main-nav">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        {% if session.user %}
+          <span style="color:#fff;margin-left:1rem">Signed in as {{ session.user }}</span>
+          {% if session.is_admin %}
+            <a href="{{ url_for('admin_panel') }}" style="margin-left:1rem;color:#fff">Admin</a>
+          {% endif %}
+          <a href="{{ url_for('logout') }}" style="margin-left:1rem;color:#fff">Logout</a>
+        {% else %}
+          <a href="{{ url_for('login') }}" style="margin-left:1rem;color:#fff">Login</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="container" style="margin-top:.75rem">
+        {% for m in messages %}
+          <div class="card" style="background:#fff6f6;border:1px solid #ffdede;margin-bottom:.5rem">{{ m }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <main class="site-main container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; {{ current_year if current_year is defined else "2025" }} Tjuepost. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

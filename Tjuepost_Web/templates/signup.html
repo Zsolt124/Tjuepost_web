@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign up - Tjuepost{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h2>Create an account</h2>
+  <form method="post" action="{{ url_for('signup') }}">
+    <label>Username</label>
+    <input name="username" type="text" style="width:100%;padding:.5rem;margin:.5rem 0;border:1px solid #e5e7eb;border-radius:6px">
+    <label>Password</label>
+    <input name="password" type="password" style="width:100%;padding:.5rem;margin:.5rem 0;border:1px solid #e5e7eb;border-radius:6px">
+      <button class="cta" type="submit">Create account</button>
+      <a href="{{ url_for('login') }}" style="margin-left:1rem;color:var(--muted)">Login</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
