@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Cloudflare Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Welcome to My Website!</h1>
+    <p id="output">Click the button to run Python logic.</p>
+    <button onclick="fetchPython()">Run Python</button>
+
+    <script>
+        async function fetchPython() {
+            const response = await fetch('/.netlify/functions/hello'); // Placeholder for serverless function
+            const data = await response.text();
+            document.getElementById('output').innerText = data;
+        }
+    </script>
+</body>
+</html>
